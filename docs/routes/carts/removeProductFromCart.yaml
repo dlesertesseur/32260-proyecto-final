@@ -1,0 +1,30 @@
+paths:
+  /api/carts/{cid}/products/{pid}:
+    delete:
+      summary: Remove product from cart
+      tags:
+        - Carts
+      parameters:
+      - name: cid
+        in: path
+        description: path parameter takes the cart id
+        required: true
+        type: string
+      - name: pid
+        in: path
+        description: path parameter takes the product id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: The cart with given id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        "401":
+          description: Unauthorized - user must be authenticated
+        "404":
+          description: Cart not found Error
+        "500":
+          description: Internal server Error

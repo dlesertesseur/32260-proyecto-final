@@ -1,0 +1,40 @@
+paths:
+  /api/products:
+    get:
+      summary: Gets every product available
+      tags:
+        - Products
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Number of items per page
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Number of page 
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Condition          
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: asc / desc        
+      responses:
+        "200":
+          description: Every product available.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        "401":
+          description: Unauthorized - user must be authenticated
+        "500":
+          description: Internal server Error

@@ -1,0 +1,23 @@
+paths:
+  /api/carts:
+    post:
+      summary: Creates a new cart
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/NewCart'
+      responses:
+        "201":
+          description: The created usuario.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        "401":
+          description: Unauthorized - user must be authenticated
+        "500":
+          description: Internal server Error   

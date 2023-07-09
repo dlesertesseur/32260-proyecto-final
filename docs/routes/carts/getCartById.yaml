@@ -1,0 +1,25 @@
+paths:
+  /api/carts/{id}:
+    get:
+      summary: Gets the cart with given id
+      tags:
+        - Carts
+      parameters:
+      - name: id
+        in: path
+        description: path parameter takes the cart id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: The cart with given id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        "401":
+          description: Unauthorized - user must be authenticated
+        "404":
+          description: Cart not found Error
+        "500":
+          description: Internal server Error

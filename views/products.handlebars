@@ -1,0 +1,75 @@
+<div style="font-size:30px;">Bienvenido:
+  {{params.user.firstName}}
+  {{params.user.lastName}}
+  </div>
+<div style="font-size:24px; margin-top:10px">Rol: {{params.user.role}}</div>
+<div style="font-size:14px; margin-top:15px">email: {{params.user.email}}</div>
+<div style="font-size:14px; margin-top:5px">Edad: {{params.user.age}}</div>
+<div style="margin-top:10px">
+  <button onclick="logout()">Logout</button>
+  <button onclick="uploadDocumentsPage('{{params.user.id}}')">Subir documentacion</button>
+</div>
+
+{{#if params.user.cart.id}}
+  <div style="margin-top:20px">
+    <a href="/api/carts/{{params.user.cart.id}}" style="margin-right:20px;">
+      Ver carrito
+    </a>
+  </div>
+{{else}}
+  <div style="margin-top:20px">
+    <button onclick="createCart('{{params.user.id}}')">Crear carrito</button>
+  </div>
+{{/if}}
+
+<br />
+<h2>Lista de produtos</h2>
+
+<table>
+  <tr>
+    <th>Titulo</th>
+    <th>Codigo</th>
+    <th>Descripcion</th>
+    <th>Precio</th>
+    <th>Estado</th>
+    <th>Stock</th>
+    <th>Categoria</th>
+    <th>Thumbnail</th>
+    <th>Owner</th>
+  </tr>
+  {{#each params.data.payload}}
+    <tr>
+      <td>{{title}}</td>
+      <td>{{code}}</td>
+      <td>{{description}}</td>
+      <td>{{price}}</td>
+      <td>{{status}}</td>
+      <td>{{stock}}</td>
+      <td>{{category}}</td>
+      <td>{{thumbnail}}</td>
+      <td>{{owner}}</td>
+      
+      {{#if ../params.user.cart.id}}
+          <td>
+            <button onclick="addProductToCart('{{../params.user.cart.id}}','{{this.id}}')">Agregar producto</button>
+          </td>
+      {{/if}}
+
+    </tr>
+  {{/each}}
+</table>
+
+<div style="margin-top:10px;">
+
+  {{#if params.data.hasPrevPage}}
+    <a href={{params.data.prevLink}} style="margin-right:10px;">
+      Pagina anterior
+    </a>
+  {{/if}}
+
+  {{#if params.data.hasNextPage}}
+    <a href={{params.data.nextLink}}> Pagina siguiente</a>
+  {{/if}}
+</div>
+
+<script src="/js/index.js"></script>

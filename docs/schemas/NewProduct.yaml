@@ -1,0 +1,46 @@
+# NewProduct
+components:
+  requestBodies:
+    NewProduct:
+      type: object
+      required:
+        - title
+        - description
+        - code
+        - price
+        - status
+        - stock
+        - category
+        - thumbnail
+      properties:
+        title:
+          type: String
+          description: The title of the product.
+        description:
+          type: String
+          description: The description of the product.
+        code:
+          type: String
+          description: The code of the product.
+        price:
+          type: number
+          description: The price of the product.
+        status:
+          type: String
+          description: The status of the product.
+        category:
+          type: String
+          description: The category of the product.
+        thumbnail:
+          type: array
+          description: Photos of product.   
+      example:
+        title: Producto 1
+        description: Descripcion 1
+        code: c0001
+        price: 999
+        status: true
+        stock: 100
+        category: cat-1
+        thumbnail: [img1.png,img2.png]
+        owner: admin

@@ -1,0 +1,42 @@
+<h2>Ticket ID: {{data.ticket.id}} Cart:{{data.cid}}</h2>
+<br />
+<h3>Codigo: {{data.ticket.code}}</h3>
+<h3>Fecha: {{data.ticket.purchase_datetime}}</h3>
+<h3>email: {{data.ticket.purchaser}}</h3>
+<h3>Total: {{data.ticket.amount}}</h3>
+
+{{#if data.products}}
+  <br />
+  <h2>Productos sin stock</h2>
+
+  <table>
+    <tr>
+      <th>Titulo</th>
+      <th>Codigo</th>
+      <th>Descripcion</th>
+      <th>Precio</th>
+      <th>Estado</th>
+      <th>Stock</th>
+      <th>Categoria</th>
+      <th>Thumbnail</th>
+      <th>#Quantity</th>
+    </tr>
+
+    {{#each data.products}}
+      <tr>
+        <td>{{product.title}}</td>
+        <td>{{product.code}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.status}}</td>
+        <td>{{product.stock}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.thumbnail}}</td>
+        <td>{{quantity}}</td>
+      </tr>
+    {{/each}}
+  </table>
+
+{{/if}}
+
+<script src="/js/index.js"></script>

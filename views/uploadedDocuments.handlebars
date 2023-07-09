@@ -1,0 +1,22 @@
+<div style="margin-top:10px;">
+  <p>
+    <div style="font-size:30px;">User:
+      {{params.user.firstName}}
+      {{params.user.lastName}}
+    </div>
+  </p>
+</div>
+
+<div style="margin-top:10px; ">
+  <p>Unload documents type</p>
+  <ol>
+    {{#each params.unloadDocs}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ol>
+</div>
+
+<p><h3>Important:</h3><h4>To change to Premium role, the user must have all
+    document types uploaded.</h4></p>
+
+<h2>{{err.message}}</h2>

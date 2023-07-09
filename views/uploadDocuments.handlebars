@@ -1,0 +1,47 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <!-- MULTIPLE FILES -->
+    <form
+      action="/api/users/{{user.id}}/documents"
+      enctype="multipart/form-data"
+      method="POST"
+    >
+
+      Select documents:
+      <input type="file" name="document" multiple /><br />
+      <input type="submit" value="Upload documents" /><br /><br />
+
+    </form>
+
+    <!-- profiles images-->
+
+    <form
+      action="/api/users/{{user.id}}/documents"
+      enctype="multipart/form-data"
+      method="POST"
+    >
+
+      Select profiles images:
+      <input type="file" name="profile" multiple accept="image/*" /><br />
+      <input type="submit" value="Upload profile image" /><br /><br />
+    </form>
+
+    <!-- products images-->
+
+    <form
+      action="/api/users/{{user.id}}/documents"
+      enctype="multipart/form-data"
+      method="POST"
+    >
+
+      Select products images:
+      <input type="file" name="product" multiple accept="image/*" /><br />
+      <input type="submit" value="Upload product photo" /><br /><br />
+    </form>
+  </body>
+
+</html>

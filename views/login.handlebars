@@ -1,0 +1,22 @@
+<form action="/api/auth/login" method="post">
+  <!-- user input-->
+  Email:<br />
+  <input type="text" name="email" placeholder="Email" required /><br /><br
+  />
+  Password:<br />
+  <input type="password" name="password" placeholder="Password" required /><br
+  /><br />
+  <!-- submit button -->
+  <input type="submit" value="login" />
+</form>
+
+<br />
+<button onclick="toGithubLogin()">GitHub Login</button>
+<br />
+<br />
+<button onclick="toResetPassword()">Restaurar contraseña</button>
+<br />
+<br />
+<button onclick="toRegister()">Registration</button>
+
+<script src="/js/index.js"></script>

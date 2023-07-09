@@ -1,0 +1,33 @@
+<h2>Lista de Carritos</h2>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>#Productos</th>
+  </tr>
+  {{#each carts}}
+    <tr>
+      <td>{{this._id}}</td>
+      <td>{{this.products.length}}</td>
+      <td>
+        <td>
+          <button onclick="inspectCart('{{this._id}}')">Ver</button>
+        </td>
+      </td>
+      {{#if this.products.length}}
+        <td>
+          <button onclick="removeProductsCart('{{this._id}}')">Eliminar</button>
+        </td>
+      {{/if}}
+
+    </tr>
+  {{/each}}
+</table>
+
+<div style="margin-top:10px;">
+  <form action="/api/carts" method="post">
+    <input type="submit" name="newCart" value="Nuevo carrito" />
+  </form>
+</div>
+
+<script src="/js/index.js"></script>

@@ -1,0 +1,31 @@
+paths:
+  /api/products/{id}:
+    put:
+      summary: Updates a product
+      tags:
+        - Products
+      parameters:
+      - name: id
+        in: path
+        description: path parameter takes the product id
+        required: true
+        type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/NewProduct'
+      responses:
+        "200":
+          description: The updated product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        "401":
+          description: Unauthorized - user must be authenticated
+        "404":
+          description: Product not found Error
+        "500":
+          description: Internal server Error                

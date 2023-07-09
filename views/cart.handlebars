@@ -1,0 +1,40 @@
+<h2>Lista de produtos en el Carrito: {{cart.id}}</h2>
+
+<table>
+  <tr>
+    <th>Titulo</th>
+    <th>Codigo</th>
+    <th>Descripcion</th>
+    <th>Precio</th>
+    <th>Estado</th>
+    <th>Stock</th>
+    <th>Categoria</th>
+    <th>Thumbnail</th>
+    <th>#Quantity</th>
+  </tr>
+
+  {{#each cart.products}}
+    <tr>
+      <td>{{product.title}}</td>
+      <td>{{product.code}}</td>
+      <td>{{product.description}}</td>
+      <td>{{product.price}}</td>
+      <td>{{product.status}}</td>
+      <td>{{product.stock}}</td>
+      <td>{{product.category}}</td>
+      <td>{{product.thumbnail}}</td>
+      <td>{{quantity}}</td>
+      <td>
+        <button onclick="removeProductCart('{{../cart.id}}','{{this.product.id}}')">Eliminar</button>
+      </td>
+    </tr>
+  {{/each}}
+</table>
+
+{{#if cart.products}}
+  <div style="margin-top:20px">
+    <button onclick="purchase('{{cart.id}}')">Purchase</button>
+  </div>
+{{/if}}
+<script src="/js/index.js"></script>
+

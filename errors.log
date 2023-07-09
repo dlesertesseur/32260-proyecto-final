@@ -1,0 +1,18 @@
+{"level":"info","message":"Server running on port: 8080"}
+{"level":"fatal","message":"Logger test FATAL level"}
+{"level":"error","message":"Logger test ERROR level"}
+{"level":"warning","message":"Logger test WARNING level"}
+{"level":"info","message":"Logger test INFO level"}
+{"level":"info","message":"Server running on port: 8080"}
+{"level":"fatal","message":"Logger test FATAL level"}
+{"level":"error","message":"Logger test ERROR level"}
+{"level":"warning","message":"Logger test WARNING level"}
+{"level":"info","message":"Logger test INFO level"}
+{"level":"fatal","message":"Logger test FATAL level"}
+{"level":"error","message":"Logger test ERROR level"}
+{"level":"fatal","message":"Logger test FATAL level"}
+{"level":"error","message":"Logger test ERROR level"}
+{"level":"fatal","message":"Logger test FATAL level"}
+{"level":"error","message":"Logger test ERROR level"}
+{"level":"fatal","message":"Logger test FATAL level"}
+{"level":"error","message":"Logger test ERROR level"}

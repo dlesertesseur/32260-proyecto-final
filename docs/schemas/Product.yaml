@@ -1,0 +1,49 @@
+# Product
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - title
+        - description
+        - code
+        - price
+        - status
+        - stock
+        - category
+        - thumbnail
+      properties:
+        id:
+          type: String
+          description: The auto-generated MongoDB id of the product.
+        title:
+          type: String
+          description: The title of the product.
+        description:
+          type: String
+          description: The description of the product.
+        code:
+          type: String
+          description: The code of the product.
+        price:
+          type: number
+          description: The price of the product.
+        status:
+          type: String
+          description: The status of the product.
+        category:
+          type: String
+          description: The category of the product.
+        thumbnail:
+          type: string
+          description: The category of the product.          
+      example:
+        title: Producto 3
+        description: Descripcion 3
+        code: 04
+        price: 1601
+        status: true
+        stock: 2940
+        category: cat-1
+        thumbnail: [img1.png,img2.png,img3.png]
+        owner: admin

@@ -1,0 +1,23 @@
+components:
+  schemas:
+    Cart:
+      type: object
+      required:
+        - id
+        - status
+      properties:
+        id:
+          type: string
+          description: The auto-generated id of the cart.
+        statis:
+          type: string
+          description: The status of the cart.
+        productos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product' 
+          description: Products list.
+      example:
+        id: 644709ec03ddfdb641eb1883
+        status: created
+        products: []
