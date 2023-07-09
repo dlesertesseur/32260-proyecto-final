@@ -1,5 +1,6 @@
 import config from "../config/config.js";
 import ProductRepository from "../repositories/product.repository.js";
+import sendMail from "./mail.service.js";
 
 const repository = new ProductRepository();
 
@@ -18,14 +19,14 @@ const insertProduct = async (product) => {
   return ret;
 };
 
-const updateProduct = async (owner, pid, body) => {
+const updateProduct = async (user, pid, body) => {
   let ret = null;
-  if (owner === config.ADMIN_ROLE) {
+  if (user.role === config.ADMIN_ROLE) {
     ret = await repository.update(pid, body);
     return ret;
   } else {
     let product = await repository.findById(pid);
-    if (owner === product.owner) {
+    if (user.email === product.owner) {
       ret = await repository.update(pid, body);
       return ret;
     } else {
@@ -38,15 +39,20 @@ const updateProduct = async (owner, pid, body) => {
   }
 };
 
-const deleteProduct = async (owner, pid) => {
+const deleteProduct = async (user, pid) => {
   let ret = null;
-  if (owner === config.ADMIN_ROLE) {
+  if (user.role === config.ADMIN_ROLE) {
     ret = await repository.delete(pid);
     return ret;
   } else {
     let product = await repository.findById(pid);
-    if (owner === product.owner) {
+    if (user.email === product.owner) {
       ret = await repository.delete(pid);
+
+      const subject = `Removed product`;
+      const body = `</br><h2>Your product ${product.title} code: ${product.code} has been successfully removed</h2>`;
+      await sendMail(user.email, subject, body);
+
       return ret;
     } else {
       const error = new Error(

@@ -105,17 +105,17 @@ const insert = async (req, res, next) => {
   }
 };
 
-const determinateOwner = (req) => {
-  const owner = req.user.role === config.ADMIN_ROLE ? config.ADMIN_ROLE : req.user.email;
-  return(owner);
-}
+// const determinateOwner = (req) => {
+//   const owner = req.user.role === config.ADMIN_ROLE ? config.ADMIN_ROLE : req.user.email;
+//   return(owner);
+// }
 
 const update = async (req, res) => {
   const pid = req.params.pid;
-  const owner = determinateOwner(req);
+  const user = req.user;
   if (pid) {
     try {
-      const product = await updateProduct(owner, pid, req.body);
+      const product = await updateProduct(user, pid, req.body);
       res.send(product);
     } catch (error) {
       res.status(error?.statusCode ? error.statusCode : 500).send({ message: error.message });
@@ -127,10 +127,10 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   const pid = req.params.pid;
-  const owner = determinateOwner(req);
+  const user = req.user;
   if (pid) {
     try {
-      const product = await deleteProduct(owner, pid);
+      const product = await deleteProduct(user, pid);
       res.send(product);
     } catch (error) {
       res.status(error?.statusCode ? error.statusCode : 500).send({ message: error.message });
