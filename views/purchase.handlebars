@@ -1,0 +1,99 @@
+<div style="font-size:30px; margin-bottom:15px">Finalizar compra</div>
+<div style="font-size:20px;">Hola,
+  {{params.user.firstName}}
+  {{params.user.lastName}}
+</div>
+<div style="font-size:14px; margin-top:15px">email: {{params.user.email}}</div>
+
+<div style="margin-top:20px">
+  Cart ID:{{params.cart.id}}
+</div>
+<br />
+<h2>Lista de produtos</h2>
+
+<table>
+  <tr>
+    <th>Titulo</th>
+    <th>Codigo</th>
+    <th>Descripcion</th>
+    <th>Precio</th>
+    <th>Estado</th>
+    <th>Stock</th>
+    <th>Categoria</th>
+    <th>Thumbnail</th>
+    <th>Owner</th>
+  </tr>
+  {{#each params.products}}
+    <tr>
+      <td>{{product.title}}</td>
+      <td>{{product.code}}</td>
+      <td>{{product.description}}</td>
+      <td>{{product.price}}</td>
+      <td>{{product.status}}</td>
+      <td>{{product.stock}}</td>
+      <td>{{product.category}}</td>
+      <td>{{product.thumbnail}}</td>
+      <td>{{quantity}}</td>
+    </tr>
+  {{/each}}
+</table>
+
+{{#if params.products}}
+  <div style="margin-top:10px">
+    <div style="font-size:20px; margin-bottom:15px;">Total a pagar: $
+      {{params.totalAmount}}</div>
+
+    <div style="font-size:20px; margin-bottom:15px;">Conversion a $USD:
+      {{params.totalUsdAmount}}</div>
+
+    <button onclick="purchaseProducts('{{params.cart.id}}')">
+      Iniciar pago de USD$
+      {{params.totalUsdAmount}}
+    </button>
+
+    <div
+      style="margin-top:15px; background:#c5c5c5; border-radius:6px; padding:10px; width:50%; visibility: hidden;"
+    >
+
+      Tarjeta:
+      <input
+        id="cardNumber"
+        type="text"
+        name="cardNumner"
+        placeholder="XXXX XXXX XXXX XXXX"
+        required
+        maxlength="16"
+        size="18"
+      /><br /><br />
+      Vecimiento:
+      <input
+        id="expiration"
+        type="text"
+        name="expiration"
+        placeholder="XX/XX"
+        required
+        maxlength="5"
+        size="5"
+      /><br /><br />
+      Codigo:
+      <input
+        id="secCode"
+        type="text"
+        name="secCode"
+        placeholder="XXX"
+        required
+        maxlength="3"
+        size="3"
+      /><br /><br />
+
+      <button type="submit" onclick="purchase('{{params.cart.id}}')">
+        Pagar USD$
+        {{params.totalUsdAmount}}
+      </button>
+    </div>
+
+  </div>
+{{/if}}
+
+<div id="errorPanel" style="font-size:20px; margin-top:15px; color:red"></div>
+<script src="/js/index.js"></script>

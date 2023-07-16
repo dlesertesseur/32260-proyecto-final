@@ -1,0 +1,75 @@
+<div style="font-size:30px; margin-bottom:15px">Finalizar compra</div>
+<div style="font-size:20px;">Hola,
+  {{params.user.firstName}}
+  {{params.user.lastName}}
+</div>
+<div style="font-size:14px; margin-top:15px">email: {{params.user.email}}</div>
+
+<div style="margin-top:20px">
+  Cart ID:{{params.cart.id}}
+</div>
+<br />
+<h2>Lista de produtos</h2>
+
+<table>
+  <tr>
+    <th>Titulo</th>
+    <th>Codigo</th>
+    <th>Descripcion</th>
+    <th>Precio</th>
+    <th>Estado</th>
+    <th>Stock</th>
+    <th>Categoria</th>
+    <th>Thumbnail</th>
+    <th>Owner</th>
+  </tr>
+  {{#each params.products}}
+    <tr>
+      <td>{{product.title}}</td>
+      <td>{{product.code}}</td>
+      <td>{{product.description}}</td>
+      <td>{{product.price}}</td>
+      <td>{{product.status}}</td>
+      <td>{{product.stock}}</td>
+      <td>{{product.category}}</td>
+      <td>{{product.thumbnail}}</td>
+      <td>{{quantity}}</td>
+    </tr>
+  {{/each}}
+</table>
+
+{{#if params.products}}
+  <div style="margin-top:10px">
+    <div style="font-size:20px; margin-bottom:15px;">Total a pagar: $
+      {{params.totalAmount}}</div>
+
+    <div style="font-size:20px; margin-bottom:15px;">Conversion a $USD:
+      {{params.totalUsdAmount}}</div>
+
+    <div
+      id="errorPanel"
+      style="font-size:20px; margin-top:15px; color:red"
+    ></div>
+
+    <div
+      id="card-element"
+      style="margin-top:15px; width: 50%; background: #e5e5e5"
+    ></div>
+
+    <div style="margin-top:15px; width: 50%;">
+      <button onclick="purchaseProducts('{{params.cart.id}}')">
+        Pagar USD$
+        {{params.totalUsdAmount}}
+      </button>
+    </div>
+
+    <div
+      id="msgPanel"
+      style="font-size:20px; margin-top:15px; color:green"
+    ></div>
+  </div>
+{{/if}}
+
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/js/stripe.js"></script>

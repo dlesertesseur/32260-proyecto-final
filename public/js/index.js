@@ -117,26 +117,7 @@ const changeRole = async (uid) => {
     });
 };
 
-const purchase = async (cid) => {
-  await fetch(`/api/carts/${cid}/purchase`, {
-    method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      location.reload();
-    });
-};
-
 const deleteUser = async (uid) => {
-
-  console.log("deleteUser urll -> ", `/api/users/${uid}`);
-
-
   await fetch(`/api/users/${uid}`, {
     method: "DELETE",
     mode: "cors",
@@ -156,4 +137,8 @@ const deleteUser = async (uid) => {
 
 const uploadDocumentsPage = () => {
   location.assign("/api/users/documents");
+};
+
+const preparePurchase = async (cid) => {
+  location.assign(`/api/carts/${cid}/preparePurchase`);
 };

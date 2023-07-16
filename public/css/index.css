@@ -1,10 +1,73 @@
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 5px;
-  }
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
 
-  html {
-    font-family: "helvetica neue", helvetica, arial, sans-serif;
-  }
-  
+html {
+  font-family: "helvetica neue", helvetica, arial, sans-serif;
+}
+
+#card-element {
+  height: 40px;
+  padding: 10px 12px;
+  color: var(--white);
+  background-color: var(--black);
+  border: 1px solid var(--main-color);
+  border-radius: 4px;
+  transition: box-shadow 150ms ease;
+}
+
+#card-element:hover {
+  border: 1px solid var(--main-color);
+}
+
+#card-element.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 var(--main-color);
+  transition: box-shadow 150ms ease;
+}
+.lowStock {
+  color: #fc3030;
+}
+
+.formInput {
+  background-color: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+  width: 80%;
+  padding: 1rem;
+  border-radius: .6rem;
+  transition: all .3s;
+  text-align: center;
+}
+
+.formInput:focus {
+  border: 2px solid var(--main-color);
+  outline: none;
+}
+
+.formInput::placeholder {
+  color: #cdcdcd;
+  text-align: center;
+}
+
+.buttonForm,
+.buttonBlack,
+.buttonDisabled {
+  background-color: var(--white);
+  font-size: 2rem;
+  padding: 1.5rem;
+  border: none;
+  cursor: pointer;
+  border-radius: .6rem;
+  font-family: 'Antonio', sans-serif;
+  margin-top: 2rem;
+  font-weight: 600;
+  transition: background-color .3s;
+}
+
+.buttonForm {
+  margin-top: 0;
+}

@@ -9,6 +9,8 @@ import {
   updateProductCart,
   removeProductCart,
   purchaseItems,
+  preparePurchaseItems,
+  purchaseProductsService,
 } from "../services/cart.service.js";
 import { findUserById } from "../services/user.service.js";
 
@@ -171,7 +173,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
-const purchase = async (req, res) => {
+const confirmPurchase = async (req, res) => {
   const cid = req.params.cid;
   const user = req.user;
 
@@ -179,6 +181,54 @@ const purchase = async (req, res) => {
     try {
       const purchaseData = await purchaseItems(user, cid);
       res.send(purchaseData);
+    } catch (error) {
+      req.logger.error(error.message);
+      res.status(400).send({ statusCode: error.code, message: error.message });
+    }
+  } else {
+    req.logger.error("Bad request");
+    res.status(400).send({ message: "Bad request" });
+  }
+};
+
+const purchaseProducts = async (req, res) => {
+  const cid = req.params.cid;
+  const user = req.user;
+
+  if (cid) {
+    try {
+      const userEntity = await findUserById(req.user.id);
+      const paymentIntent = await purchaseProductsService(user, cid);
+      res.send({
+        status: "success",
+        payload: {
+          client_secret: paymentIntent.client_secret,
+          purchaser: userEntity.firstName + " " + userEntity.lastName
+        },
+      });
+    } catch (error) {
+      req.logger.error(error.message);
+      res.status(400).send({ statusCode: error.code, message: error.message });
+    }
+  } else {
+    req.logger.error("Bad request");
+    res.status(400).send({ message: "Bad request" });
+  }
+};
+
+const preparePurchase = async (req, res) => {
+  const cid = req.params.cid;
+  const user = req.user;
+
+  if (cid) {
+    try {
+      const params = await preparePurchaseItems(user, cid);
+
+      res.render("prepare-purchase", {
+        title: "Prepare Purchase",
+        style: "index.css",
+        params,
+      });
     } catch (error) {
       req.logger.error(error.message);
       res.status(error.code).send({ message: error.message });
@@ -203,6 +253,7 @@ const getError = (index) => {
 
   return ret;
 };
+
 const processError = async (req, res) => {
   const index = req.params.erridx;
   try {
@@ -215,6 +266,11 @@ const processError = async (req, res) => {
   }
 };
 
+const getPublicStripeKey = async (req, res) => {
+  const ret = { statusCode: 200, payload: config.STRIPE_PUBLIC_API_KEY };
+  res.send(ret);
+};
+
 export {
   getAll,
   findById,
@@ -225,6 +281,9 @@ export {
   removeProduct,
   updateProduct,
   getCartsList,
-  purchase,
+  purchaseProducts,
+  confirmPurchase,
+  preparePurchase,
   processError,
+  getPublicStripeKey,
 };

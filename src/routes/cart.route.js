@@ -9,8 +9,11 @@ import {
   removeProduct,
   updateProduct,
   getCartsList,
-  purchase,
+  confirmPurchase,
   processError,
+  preparePurchase,
+  purchaseProducts,
+  getPublicStripeKey
 } from "../controllers/cart.controller.js";
 import { Router } from "express";
 import { roleUserValidation } from "../middlewares/index.js";
@@ -22,6 +25,13 @@ cartRoute.get(
   passport.authenticate("current", { session: false }),
   getAll
 );
+
+cartRoute.get(
+  "/stripe-token",
+  passport.authenticate("current", { session: false }),
+  getPublicStripeKey
+);
+
 cartRoute.get(
   "/list",
   passport.authenticate("current", { session: false }),
@@ -32,6 +42,19 @@ cartRoute.get(
   "/:cid",
   passport.authenticate("current", { session: false }),
   findById
+);
+
+cartRoute.get(
+  "/:cid/preparePurchase",
+  passport.authenticate("current", { session: false }),
+  preparePurchase
+);
+
+cartRoute.post(
+  "/:cid/purchaseProducts",
+  passport.authenticate("current", { session: false }),
+  roleUserValidation,
+  purchaseProducts
 );
 
 cartRoute.post(
@@ -49,10 +72,10 @@ cartRoute.post(
 );
 
 cartRoute.post(
-  "/:cid/purchase",
+  "/:cid/confirmPurchase",
   passport.authenticate("current", { session: false }),
   roleUserValidation,
-  purchase
+  confirmPurchase
 );
 
 cartRoute.put(
