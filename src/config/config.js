@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const config = {
-  PORT: process.env.HTTP_PORT ? process.env.HTTP_PORT : 8080,
+  PORT: process.env.PORT ? process.env.PORT : 8080,
   MONGO_URL: process.env.MONGO_URL,
   DB_NAME: process.env.DB_NAME,
   SESSION_SECRET: process.env.SESSION_SECRET,
